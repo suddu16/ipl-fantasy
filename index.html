@@ -3,122 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSV Viewer</title>
-    <style>
-        .tab { display: none; }
-        .tab.active { display: block; }
-
-        /* General Styles */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f9;
-}
-
-h2 {
-    color: #333;
-}
-
-/* Tab buttons */
-button {
-    padding: 10px 20px;
-    margin: 5px;
-    border: none;
-    background-color: #007BFF;
-    color: white;
-    cursor: pointer;
-    border-radius: 4px;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-/* Active Tab */
-.tab { 
-    display: none; 
-}
-
-.tab.active { 
-    display: block;
-}
-
-select {
-    padding: 8px;
-    margin: 10px 0;
-    font-size: 16px;
-}
-
-/* Table Styling */
-table {
-    width: 100%;
-    margin-top: 20px;
-    border-collapse: collapse;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-th, td {
-    padding: 10px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-th {
-    background-color: #007BFF;
-    color: white;
-}
-
-tr:hover {
-    background-color: #f1f1f1;
-}
-
-table td, table th {
-    border-left: 1px solid #ddd;
-}
-
-table th:first-child, table td:first-child {
-    border-left: none;
-}
-
-#dataTable, #group-1Table, #group-2Table {
-    margin-top: 20px;
-}
-
-    </style>
+    <title>IPL Fantasy 2025</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <div>
-        <!-- Tabs for data, group_1, group_2 -->
-        <button onclick="showTab('data')">Data</button>
-        <button onclick="showTab('group_1')">Group 1</button>
-        <button onclick="showTab('group_2')">Group 2</button>
-    </div>
+<h1>IPL Fantasy 2025</h1>
 
-    <!-- Tab content for each group -->
-    <div id="data" class="tab active">
-        <h2>Data</h2>
-        <select id="dataSelector" onchange="loadCSV('data')"></select>
-        <div id="dataMessage"></div>
-        <div id="dataTable"></div>
-    </div>
+<div class="tabs">
+    <button class="tab-button" onclick="showTab('data')">MVP Data</button>
+    <button class="tab-button" onclick="showTab('group_1')">Group 1</button>
+    <button class="tab-button" onclick="showTab('group_2')">Group 2</button>
+    <button class="tab-button" onclick="showTab('group_1_players')">Group 1 Players</button>
+    <button class="tab-button" onclick="showTab('group_2_players')">Group 2 Players</button>
+</div>
 
-    <div id="group_1" class="tab">
-        <h2>Group 1</h2>
-        <select id="group_1Selector" onchange="loadCSV('group_1')"></select>
-        <div id="group_1Message"></div>
-        <div id="group_1Table"></div>
-    </div>
+<div id="data" class="tab active">
+    <h2>MVP Data</h2>
+    <select id="dataSelector" onchange="loadCSV('data')"></select>
+    <p id="dataMessage"></p>
+    <div id="dataTable"></div>
+</div>
 
-    <div id="group_2" class="tab">
-        <h2>Group 2</h2>
-        <select id="group_2Selector" onchange="loadCSV('group_2')"></select>
-        <div id="group_2Message"></div>
-        <div id="group_2Table"></div>
-    </div>
+<div id="group_1" class="tab">
+    <h2>Group 1</h2>
+    <select id="group_1Selector" onchange="loadCSV('group_1')"></select>
+    <p id="group_1Message"></p>
+    <div id="group_1Table"></div>
+</div>
 
-    <script src="script.js"></script>
+<div id="group_2" class="tab">
+    <h2>Group 2</h2>
+    <select id="group_2Selector" onchange="loadCSV('group_2')"></select>
+    <p id="group_2Message"></p>
+    <div id="group_2Table"></div>
+</div>
+
+<div id="group_1_players" class="tab">
+    <h2>Group 1 Players</h2>
+    <select id="group_1PlayersSelector" onchange="loadCSV('group_1Players')">
+        <option value="">Select a Player</option>
+        <option value="ipl2025/group_1/Mahaarajan.csv">Mahaarajan</option>
+        <option value="ipl2025/group_1/Naren.csv">Naren</option>
+        <option value="ipl2025/group_1/Niranjini.csv">Niranjini</option>
+        <option value="ipl2025/group_1/Priyanka.csv">Priyanka</option>
+        <option value="ipl2025/group_1/Raghav.csv">Raghav</option>
+        <option value="ipl2025/group_1/Shashaank.csv">Shashaank</option>
+        <option value="ipl2025/group_1/Srikumar.csv">Srikumar</option>
+        <option value="ipl2025/group_1/Sriram.csv">Sriram</option>
+        <option value="ipl2025/group_1/Sudarshan.csv">Sudarshan</option>
+    </select>
+    <p id="group_1PlayerMessage"></p>
+    <div id="group_1PlayerTable"></div>
+</div>
+
+<div id="group_2_players" class="tab">
+    <h2>Group 2 Players</h2>
+    <select id="group_2PlayersSelector" onchange="loadCSV('group_2Players')">
+        <option value="">Select a Player</option>
+        <option value="ipl2025/group_2/Arvindh.csv">Arvindh</option>
+        <option value="ipl2025/group_2/Manav.csv">Manav</option>
+        <option value="ipl2025/group_2/Niranjini.csv">Niranjini</option>
+        <option value="ipl2025/group_2/Raghav.csv">Raghav</option>
+        <option value="ipl2025/group_2/Sriram V.csv">Sriram V</option>
+        <option value="ipl2025/group_2/Sriram KM.csv">Sriram KM</option>
+        <option value="ipl2025/group_2/Vasan.csv">Vasan</option>
+        <option value="ipl2025/group_2/Vasanth.csv">Vasanth</option>
+    </select>  
+    <p id="group_2PlayerMessage"></p>
+    <div id="group_2PlayerTable"></div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>

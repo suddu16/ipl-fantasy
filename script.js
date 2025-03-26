@@ -18,13 +18,12 @@ function populateDropdowns() {
             }
         } else {
             for (let day = 0; day <= maxDays; day++) {
-            const option = document.createElement("option");
-            option.value = `ipl2025/${folder}/ipl2025_results_day_${day}.csv`;
-            option.textContent = `Day ${day}`;
-            select.appendChild(option);
+                const option = document.createElement("option");
+                option.value = `ipl2025/${folder}/ipl2025_results_day_${day}.csv`;
+                option.textContent = `Day ${day}`;
+                select.appendChild(option);
             }
         }
-
     });
 }
 
@@ -35,12 +34,34 @@ function showTab(folder) {
 }
 
 // Function to load CSV and check if it exists
-// Function to load CSV and check if it exists
 async function loadCSV(folder) {
-    const select = document.getElementById(`${folder}Selector`);
-    const filename = select.value;
-    const messageDiv = document.getElementById(`${folder}Message`);
-    const tableDiv = document.getElementById(`${folder}Table`);
+    let select, filename, messageDiv, tableDiv;
+
+    // Set up player tabs
+    if (folder === "group_1Players") {
+        select = document.getElementById("group_1PlayersSelector");
+        filename = select.value;
+        messageDiv = document.getElementById("group_1PlayerMessage");
+        tableDiv = document.getElementById("group_1PlayerTable");
+    } else if (folder === "group_2Players") {
+        select = document.getElementById("group_2PlayersSelector");
+        filename = select.value;
+        messageDiv = document.getElementById("group_2PlayerMessage");
+        tableDiv = document.getElementById("group_2PlayerTable");
+    } else {
+        // Set up other tabs (data, group_1, group_2)
+        select = document.getElementById(`${folder}Selector`);
+        filename = select.value;
+        messageDiv = document.getElementById(`${folder}Message`);
+        tableDiv = document.getElementById(`${folder}Table`);
+    }
+    console.log('here');
+
+    // Check if the messageDiv and tableDiv are not null
+    if (!messageDiv || !tableDiv) {
+        console.error(`Error: Cannot find elements for ${folder} - messageDiv or tableDiv is null.`);
+        return;
+    }
 
     try {
         const response = await fetch(filename, { method: "HEAD" });
@@ -70,7 +91,7 @@ async function loadCSV(folder) {
 
         // Add "Day" as the first column in the header
         const thDay = document.createElement("th");
-        thDay.textContent = "Day";
+        thDay.textContent = "#";
         headerRow.appendChild(thDay);
 
         // Add CSV headers (without "Day" as it's already added)
@@ -109,7 +130,6 @@ async function loadCSV(folder) {
         messageDiv.textContent = `File not found: ${filename}. Wait for it to be generated.`;
     }
 }
-
 
 // Initialize on page load
 document.addEventListener("DOMContentLoaded", () => {
