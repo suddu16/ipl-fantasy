@@ -1,6 +1,7 @@
 name: Selenium On GitHub Action test
 on:
   workflow_dispatch:
+permissions: write-all
 jobs:
   scrape:
     runs-on: ubuntu-latest
