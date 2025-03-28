@@ -12,16 +12,14 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
+          cache: pip
       - name: Installing package list
         run: apt list --installed    
       - name: Removing previous chrome instances on runner 
-        run: sudo apt purge google-chrome-stable  
-        
-       # Need to fetch reqs if needed
-      - name: Installing all necessary packages
-        run: pip install chromedriver-autoinstaller selenium pyvirtualdisplay
-      - name: Install xvfb
-        run: sudo apt-get install xvfb
+        run: sudo apt purge google-chrome-stable
+
+      - name: Installing dependencies from requirements
+        run: pip install -r requirements.txt
 
       - name: Running the Python script
         run: python ipl2025/hello-world.py
