@@ -21,8 +21,8 @@ jobs:
       - name: Installing dependencies from requirements
         run: pip install -r requirements.txt
 
-      - name: Running the Python script
-        run: python ipl2025/hello-world.py
+      - name: Running the leaderboard calculation
+        run: jupyter execute ipl2025/ipl2025_fantasy.ipynb
         
       - name: Commit and Push The Results From Python Selenium Action
         run: |
