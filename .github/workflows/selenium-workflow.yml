@@ -22,7 +22,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Calculating points
-        run: $ python ipl2025/ipl2025_fantasy.py
+        run: python ipl2025/ipl2025_fantasy.py
         
       - name: Commit and Push The Results From Python Selenium Action
         run: |
