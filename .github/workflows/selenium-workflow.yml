@@ -11,7 +11,7 @@ jobs:
       - name: Setting up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.9'
+          python-version: '3.13'
           cache: pip
       - name: Installing package list
         run: apt list --installed    
