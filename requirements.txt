@@ -19,7 +19,7 @@ html-table-parser-python3==0.3.1
 html5lib==1.1
 idna==3.10
 ipykernel==6.29.5
-ipython==9.0.2
+ipython==8.2.0
 ipython_pygments_lexers==1.1.1
 itsdangerous==2.2.0
 jedi==0.19.2
