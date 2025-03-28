@@ -21,8 +21,8 @@ jobs:
       - name: Installing dependencies from requirements
         run: pip install -r requirements.txt
 
-      - name: Converting python notebook to python script
-        run: $ jupyter nbconvert --to script *.ipynb
+      - name: Calculating points
+        run: $ python ipl2025/ipl2025_fantasy.py
         
       - name: Commit and Push The Results From Python Selenium Action
         run: |
