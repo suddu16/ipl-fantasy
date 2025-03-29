@@ -42,7 +42,7 @@ prev_day = 'day_' + str(day_num - 1)
 print(day_num)
 
 
-# In[34]:
+# In[ ]:
 
 
 from selenium import webdriver
@@ -56,6 +56,7 @@ chrome_options = Options()
 chrome_options.add_argument('user-agent={0}'.format(user_agent))
 chrome_options.add_argument("--window-size=1920,1080")
 chrome_options.add_argument("--headless=new")
+chrome_options.add_argument("--no-sandbox")
 
 driver = webdriver.Chrome(options=chrome_options)
 
@@ -93,7 +94,7 @@ mvp_df.to_csv(f'./data/mvp_{day}.csv', index=False)
 mvp_df
 
 
-# In[36]:
+# In[ ]:
 
 
 from selenium import webdriver
@@ -106,6 +107,7 @@ chrome_options = Options()
 chrome_options.add_argument('user-agent={0}'.format(user_agent))
 chrome_options.add_argument("--window-size=1920,1080")
 chrome_options.add_argument("--headless=new")
+chrome_options.add_argument("--no-sandbox")
 driver = webdriver.Chrome(options=chrome_options)
 
 url = 'https://www.espncricinfo.com/series/ipl-2025-1449924/points-table-standings'
