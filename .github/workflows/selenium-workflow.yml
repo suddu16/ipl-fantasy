@@ -24,7 +24,10 @@ jobs:
       - name: Calculating points
         run: |
          cd ipl2025
-         python ipl2025_fantasy.py
+         python ipl2025_fantasy_points_fetcher.py
+         python ipl2025_fantasy.py group_1
+         python ipl2025_fantasy.py group_2
+         cd ..
         
       - name: Commit and Push The Results From Python Selenium Action
         run: |
