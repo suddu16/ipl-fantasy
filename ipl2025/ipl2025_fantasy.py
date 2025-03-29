@@ -49,7 +49,8 @@ print(group)
 
 results_file = f'./{group}/ipl2025_results_{day}.csv'
 prev_results_file = f'./{group}/ipl2025_results_{prev_day}.csv'
-graph_file = f'./{group}/ipl_leaderboard.png'
+leaderboard_graph_file = f'./{group}/ipl_leaderboard.png'
+leaderboard_file = f'./{group}/ipl_leaderboard.txt'
 
 ipl_mock_auction_summary = f'./{group}/IPL2025MockAuctionSummary.csv'
 
@@ -198,7 +199,7 @@ graph_scores_t.to_csv(results_file, header=False)
 graph_scores_t
 
 
-# In[34]:
+# In[ ]:
 
 
 import matplotlib.pyplot as plt
@@ -206,11 +207,11 @@ ax = graph_scores.plot.line(marker='o')
 #ax.set_xlabel("Days")
 ax.set_ylabel("Points")
 plt.legend(bbox_to_anchor=(1.02, 1), loc='upper left', borderaxespad=0)
-plt.savefig(graph_file, bbox_inches="tight")
+plt.savefig(leaderboard_graph_file, bbox_inches="tight")
 plt.show()
 
 
-# In[35]:
+# In[ ]:
 
 
 scores_sorted = {k: v for k, v in sorted(scores.items(), key=lambda item: item[1], reverse=True)}
@@ -220,5 +221,8 @@ scores_msg_df = pd.DataFrame(
     scores_sorted.items(),
     columns=['Manager', 'Points']
 )
-print(f'*{day.upper()}*\n```\n{scores_msg_df.to_markdown(index=False)}\n```')
+leaderboard_table = f'*{day.upper()}*\n```\n{scores_msg_df.to_markdown(index=False)}\n```'
+print()
+with open(leaderboard_file, 'w') as f:
+    f.write(leaderboard_table)
 
