@@ -2,13 +2,13 @@
 ```
 | Manager    |   Points |
 |:-----------|---------:|
-| Naren      |    295   |
+| Naren      |    311   |
+| Raghav     |    282   |
+| Sriram     |    271   |
 | Sudarshan  |    254   |
 | Niranjini  |    243.5 |
-| Sriram     |    236.5 |
-| Raghav     |    225.5 |
-| Shashaank  |    222.5 |
-| Mahaarajan |    207.5 |
-| Srikumar   |    203.5 |
-| Priyanka   |    187   |
+| Srikumar   |    239.5 |
+| Shashaank  |    233.5 |
+| Mahaarajan |    230.5 |
+| Priyanka   |    194   |
 ```
