@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[32]:
+# In[13]:
 
 
 import pandas as pd
@@ -28,7 +28,7 @@ pd.set_option('display.max_rows',None) #display all rows
 #  pip3 install thefuzz
 
 
-# In[33]:
+# In[ ]:
 
 
 from datetime import date
@@ -81,7 +81,7 @@ html = driver.page_source
 driver.quit()
 
 
-# In[35]:
+# In[16]:
 
 
 tables = pd.read_html(io.StringIO(html))

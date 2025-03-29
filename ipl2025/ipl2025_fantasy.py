@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[37]:
+# In[ ]:
 
 
 import pandas as pd
@@ -25,10 +25,9 @@ pd.set_option('display.max_rows',None) #display all rows
 #  pip3 install matplotlib
 #  pip3 install selenium
 #  pip3 install tabulate
-#  pip3 install thefuzz
 
 
-# In[38]:
+# In[ ]:
 
 
 import sys
@@ -54,28 +53,28 @@ prev_results_file = f'./{group}/ipl2025_results_{prev_day}.csv'
 ipl_mock_auction_summary = f'./{group}/IPL2025MockAuctionSummary.csv'
 
 
-# In[39]:
+# In[21]:
 
 
 mvp_df = pd.read_csv(f'./data/mvp_{day}.csv')
 mvp_df
 
 
-# In[40]:
+# In[22]:
 
 
 fantasy_teams_auction_df = pd.read_csv(ipl_mock_auction_summary)
 fantasy_teams_auction_df
 
 
-# In[ ]:
+# In[23]:
 
 
 fantasy_mgrs = fantasy_teams_auction_df.columns
 fantasy_mgrs.to_list()
 
 
-# In[ ]:
+# In[24]:
 
 
 #Make new dataframe for manager_teams 
@@ -83,7 +82,7 @@ fantasy_mgr_teams = fantasy_teams_auction_df.iloc[:1]
 fantasy_mgr_teams
 
 
-# In[ ]:
+# In[25]:
 
 
 import os
@@ -103,7 +102,7 @@ for mgr in fantasy_teams_df.columns:
 fantasy_teams_df
 
 
-# In[ ]:
+# In[26]:
 
 
 from thefuzz import fuzz
@@ -138,20 +137,20 @@ for mgr in fantasy_mgrs:
         print(f'All players have min fantasy points.')
 
 
-# In[ ]:
+# In[27]:
 
 
 scores
 
 
-# In[ ]:
+# In[28]:
 
 
 ipl_team_pts_tbl = pd.read_csv(f'./data/standings_{day}.csv')
 ipl_team_pts_tbl
 
 
-# In[ ]:
+# In[29]:
 
 
 for mgr in fantasy_teams_df.columns:
@@ -164,34 +163,41 @@ for mgr in fantasy_teams_df.columns:
         print(f'{str(mgr)}\t{str(fantasy_mgr_teams[mgr].values)}\t{str(no_of_wins)}')
 
 
-# In[ ]:
+# In[30]:
 
 
-prev_scores = pd.read_csv(prev_results_file)
+prev_scores = pd.read_csv(prev_results_file, header=None)
+prev_scores = prev_scores.T
+new_header = prev_scores.iloc[0]
+prev_scores = prev_scores[1:]
+prev_scores.columns = new_header
 prev_scores_dicts = prev_scores.to_dict(orient='records')
 prev_scores_dicts
 
 
-# In[ ]:
+# In[31]:
 
 
 current_scores_dict = prev_scores_dicts + [scores]
 
 
-# In[ ]:
+# In[32]:
 
 
 graph_scores = pd.DataFrame(current_scores_dict)
 graph_scores
 
 
-# In[ ]:
+# In[33]:
 
 
-graph_scores.to_csv(results_file, index=False)
+graph_scores_t = graph_scores.T
+graph_scores_t = graph_scores_t.sort_values(by=graph_scores_t.columns[-1], ascending=False)
+graph_scores_t.to_csv(results_file, header=False)
+graph_scores_t
 
 
-# In[ ]:
+# In[34]:
 
 
 import matplotlib.pyplot as plt
@@ -199,10 +205,11 @@ ax = graph_scores.plot.line(marker='o')
 #ax.set_xlabel("Days")
 ax.set_ylabel("Points")
 plt.legend(bbox_to_anchor=(1.02, 1), loc='upper left', borderaxespad=0)
+plt.savefig(graph_file, bbox_inches="tight")
 plt.show()
 
 
-# In[ ]:
+# In[35]:
 
 
 scores_sorted = {k: v for k, v in sorted(scores.items(), key=lambda item: item[1], reverse=True)}
