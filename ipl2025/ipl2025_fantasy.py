@@ -49,6 +49,7 @@ print(group)
 
 results_file = f'./{group}/ipl2025_results_{day}.csv'
 prev_results_file = f'./{group}/ipl2025_results_{prev_day}.csv'
+graph_file = f'./{group}/ipl_leaderboard.png'
 
 ipl_mock_auction_summary = f'./{group}/IPL2025MockAuctionSummary.csv'
 
