@@ -1,19 +1,18 @@
 const folders = ["data", "group_1", "group_2"];
 const maxDays = 60;
 const mainlineBranch = `https://raw.githubusercontent.com/suddu16/ipl-fantasy/main`;
+
 // Function to populate dropdowns for each tab
 function populateDropdowns() {
     folders.forEach(folder => {
         const select = document.getElementById(`${folder}Selector`);
         if (folder === 'data') {
-            // Handle 'data' folder with mvp_day_X.csv files
-            for (let i = 0; i <= 60; i++) { // Assuming you have up to 60 days worth of data
+            for (let i = 0; i <= 60; i++) { 
                 const filename = `${mainlineBranch}/ipl2025/data/mvp_day_${i}.csv`;
 
-                // Create an option for each file
                 const option = document.createElement("option");
                 option.value = filename;
-                option.textContent = `Day ${i}`; // Display "Day X" in the dropdown
+                option.textContent = `Day ${i}`;
                 select.appendChild(option);
             }
         } else {
@@ -25,12 +24,6 @@ function populateDropdowns() {
             }
         }
     });
-}
-
-// Function to switch between tabs
-function showTab(folder) {
-    document.querySelectorAll(".tab").forEach(tab => tab.classList.remove("active"));
-    document.getElementById(folder).classList.add("active");
 }
 
 // Function to load CSV and check if it exists
@@ -55,9 +48,7 @@ async function loadCSV(folder) {
         messageDiv = document.getElementById(`${folder}Message`);
         tableDiv = document.getElementById(`${folder}Table`);
     }
-    console.log('here');
 
-    // Check if the messageDiv and tableDiv are not null
     if (!messageDiv || !tableDiv) {
         console.error(`Error: Cannot find elements for ${folder} - messageDiv or tableDiv is null.`);
         return;
@@ -74,65 +65,113 @@ async function loadCSV(folder) {
         const csvResponse = await fetch(filename);
         const csvText = await csvResponse.text();
 
-        // Convert CSV text to a 2D array, filtering out any empty rows
+        // Convert CSV text to a 2D array, filtering out empty rows
         const rows = csvText.split("\n")
             .map(row => row.split(","))
-            .filter(row => row.length > 1); // Filter out empty or malformed rows
+            .filter(row => row.length > 1); 
 
         // Clear previous table data
         tableDiv.innerHTML = "";
 
         // Create a table
         const table = document.createElement("table");
-
+        table.classList.add("table", "table-striped"); // Add table styles
+        table.id = `${folder}TableData`;  
         // Table header
         const thead = document.createElement("thead");
         const headerRow = document.createElement("tr");
 
-        // Add "Day" as the first column in the header
-        const thDay = document.createElement("th");
-        thDay.textContent = "#";
-        headerRow.appendChild(thDay);
+        if (rows.length === 0) throw new Error("Empty file or invalid format");
 
-        // Add CSV headers (without "Day" as it's already added)
-        rows[0].forEach(field => {
-            const th = document.createElement("th");
-            th.textContent = field;
-            headerRow.appendChild(th);
-        });
+        // Process headers based on folder type
+        if (folder === "data") {
+            // MVP Data - render as-is
+            rows[0].forEach(field => {
+                const th = document.createElement("th");
+                th.textContent = field;
+                headerRow.appendChild(th);
+            });
+        } else if (folder === "group_1Players" || folder === "group_2Players") {
+            // For player groups, use the first row as header, and reverse columns for days
+            const totalDays = rows[0].length - 1;
+            headerRow.appendChild(createHeaderCell("Player")); // First column remains "Player"
+            for (let day = totalDays; day > 0; day--) {
+                headerRow.appendChild(createHeaderCell(`Day ${day}`));
+            }
+        } else {
+            // Other groups - Keep Player column, reverse the rest
+            const totalDays = rows[0].length - 1;
+            headerRow.appendChild(createHeaderCell("Player")); // First column remains "Player"
+            for (let day = totalDays; day > 0; day--) {
+                headerRow.appendChild(createHeaderCell(`Day ${day}`));
+            }
+        }
+
         thead.appendChild(headerRow);
         table.appendChild(thead);
 
         // Table body
         const tbody = document.createElement("tbody");
-        rows.slice(1).forEach((row, index) => {
+
+        rows.slice(1).forEach(row => {
             const tr = document.createElement("tr");
 
-            // Add "Day" number as the first column in each row
-            const tdDay = document.createElement("td");
-            tdDay.textContent = index; // Incrementing day starting from 0
-            tr.appendChild(tdDay);
+            if (folder === "data") {
+                // Render MVP data as-is
+                row.forEach(cell => {
+                    tr.appendChild(createCell(cell));
+                });
+            } else {
+                // For group_1Players and group_2Players, reverse the order for days
+                tr.appendChild(createCell(row[0])); // Player name first
+                for (let i = row.length - 1; i > 0; i--) {
+                    tr.appendChild(createCell(row[i]));
+                }
+            }
 
-            // Add the rest of the row data
-            row.forEach(cell => {
-                const td = document.createElement("td");
-                td.textContent = cell;
-                tr.appendChild(td);
-            });
             tbody.appendChild(tr);
         });
-        table.appendChild(tbody);
 
-        // Append the table to the div
+        table.appendChild(tbody);
         tableDiv.appendChild(table);
+
+                // Initialize DataTable functionality
+        $(document).ready(function() {
+                $(table).DataTable({
+                    searching: true,  // Enable search
+                    ordering: true,   // Enable sorting
+                    info: true,       // Show information (e.g., number of records)
+                });
+        });
 
     } catch (error) {
         messageDiv.textContent = `File not found: ${filename}. Wait for it to be generated.`;
     }
 }
 
+// Helper function to create table header cells
+function createHeaderCell(text) {
+    const th = document.createElement("th");
+    th.textContent = text;
+    return th;
+}
+
+// Helper function to create table data cells
+function createCell(text) {
+    const td = document.createElement("td");
+    td.textContent = text || "-"; // Handle empty values
+    return td;
+}
+
 // Initialize on page load
 document.addEventListener("DOMContentLoaded", () => {
     populateDropdowns();
-    showTab("data"); // Show 'data' tab by default
+    showTab("data");
+
+    // Fix tab switching issue
+    document.querySelectorAll(".tab-button").forEach(button => {
+        button.addEventListener("click", (event) => {
+            showTab(event.target.getAttribute("data-tab"));
+        });
+    });
 });
