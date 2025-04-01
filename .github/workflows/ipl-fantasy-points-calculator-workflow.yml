@@ -1,4 +1,4 @@
-name: Selenium On GitHub Action test
+name: IPL Fantasy points calculator
 on:
   workflow_dispatch:
   schedule:
