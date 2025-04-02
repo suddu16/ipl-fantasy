@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
+# In[67]:
 
 
 import pandas as pd
@@ -55,28 +55,28 @@ leaderboard_file = f'./{group}/ipl_leaderboard.txt'
 ipl_mock_auction_summary = f'./{group}/IPL2025MockAuctionSummary.csv'
 
 
-# In[21]:
+# In[69]:
 
 
 mvp_df = pd.read_csv(f'./data/mvp_{day}.csv')
 mvp_df
 
 
-# In[22]:
+# In[70]:
 
 
 fantasy_teams_auction_df = pd.read_csv(ipl_mock_auction_summary)
 fantasy_teams_auction_df
 
 
-# In[23]:
+# In[71]:
 
 
 fantasy_mgrs = fantasy_teams_auction_df.columns
 fantasy_mgrs.to_list()
 
 
-# In[24]:
+# In[72]:
 
 
 #Make new dataframe for manager_teams 
@@ -84,7 +84,7 @@ fantasy_mgr_teams = fantasy_teams_auction_df.iloc[:1]
 fantasy_mgr_teams
 
 
-# In[25]:
+# In[73]:
 
 
 import os
@@ -104,7 +104,7 @@ for mgr in fantasy_teams_df.columns:
 fantasy_teams_df
 
 
-# In[26]:
+# In[74]:
 
 
 from thefuzz import fuzz
@@ -132,27 +132,27 @@ for mgr in fantasy_mgrs:
             print(f'\t{player_name} not found in mvp_table... Double check the spelling of player name, closest match is {closest_match}')
             all_players_have_min_pts = False
     mgr_df[f'{day}'] = mgr_df[mgr].map(mgr_day_pts)
-    mgr_df = mgr_df.reindex(sorted(mgr_df.columns), axis=1)
+    mgr_df = mgr_df.reindex(sorted(mgr_df.columns, key = lambda x: int(x.split("_")[1] if '_' in x else 0)), axis=1)
     mgr_df.to_csv(mgr_file, index=False)
     print(f'*{day.upper()}*\n```\n{mgr_df.to_markdown(index=False)}\n```')
     if all_players_have_min_pts:
         print(f'All players have min fantasy points.')
 
 
-# In[27]:
+# In[75]:
 
 
 scores
 
 
-# In[28]:
+# In[76]:
 
 
 ipl_team_pts_tbl = pd.read_csv(f'./data/standings_{day}.csv')
 ipl_team_pts_tbl
 
 
-# In[29]:
+# In[77]:
 
 
 for mgr in fantasy_teams_df.columns:
@@ -165,7 +165,7 @@ for mgr in fantasy_teams_df.columns:
         print(f'{str(mgr)}\t{str(fantasy_mgr_teams[mgr].values)}\t{str(no_of_wins)}')
 
 
-# In[30]:
+# In[78]:
 
 
 prev_scores = pd.read_csv(prev_results_file, header=None)
@@ -177,20 +177,20 @@ prev_scores_dicts = prev_scores.to_dict(orient='records')
 prev_scores_dicts
 
 
-# In[31]:
+# In[79]:
 
 
 current_scores_dict = prev_scores_dicts + [scores]
 
 
-# In[32]:
+# In[80]:
 
 
 graph_scores = pd.DataFrame(current_scores_dict)
 graph_scores
 
 
-# In[33]:
+# In[81]:
 
 
 graph_scores_t = graph_scores.T
@@ -199,7 +199,7 @@ graph_scores_t.to_csv(results_file, header=False)
 graph_scores_t
 
 
-# In[ ]:
+# In[82]:
 
 
 import matplotlib.pyplot as plt
@@ -211,7 +211,7 @@ plt.savefig(leaderboard_graph_file, bbox_inches="tight")
 plt.show()
 
 
-# In[ ]:
+# In[83]:
 
 
 scores_sorted = {k: v for k, v in sorted(scores.items(), key=lambda item: item[1], reverse=True)}
