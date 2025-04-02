@@ -4,7 +4,7 @@
 |:-----------|---------:|
 | Naren      |    408.5 |
 | Raghav     |    408   |
-| Sriram     |    390.5 |
+| Sriram     |    401.5 |
 | Srikumar   |    378   |
 | Shashaank  |    376   |
 | Sudarshan  |    360.5 |

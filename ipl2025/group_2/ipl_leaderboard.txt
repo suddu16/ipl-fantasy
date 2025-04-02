@@ -4,9 +4,9 @@
 |:--------------|---------:|
 | Raghav        |    447   |
 | Vasanth       |    441.5 |
+| Vasan         |    438.5 |
 | Niranjini     |    429   |
 | Manav         |    428   |
-| Vasan         |    427.5 |
 | Kumar & Akash |    414.5 |
 | Sriram V      |    323.5 |
 | Arvindh       |    307.5 |
