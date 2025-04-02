@@ -147,6 +147,8 @@ $(document).ready(function() {
         $(table).DataTable({
             searching: true,  
             ordering: true, 
+            pageLength: 20,
+
             info: true,
             order: [[2, "desc"]] 
     
@@ -155,6 +157,8 @@ $(document).ready(function() {
         // For group_1 and group_2, sort by the last column
         $(table).DataTable({
             searching: true,  
+            pageLength: 20,
+
             ordering: true,   
             info: true,       
             order: [[1, "desc"]] 
