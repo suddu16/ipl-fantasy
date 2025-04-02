@@ -112,8 +112,11 @@ async function loadCSV(folder) {
 
         // Table body
         const tbody = document.createElement("tbody");
-
-        rows.slice(1).forEach(row => {
+        var startIndex = 1
+        if (folder == "group_1" || folder == "group_2") {
+            startIndex = 0
+        }
+        rows.slice(startIndex).forEach(row => {
             const tr = document.createElement("tr");
 
             if (folder === "data") {
@@ -135,14 +138,30 @@ async function loadCSV(folder) {
         table.appendChild(tbody);
         tableDiv.appendChild(table);
 
-                // Initialize DataTable functionality
-        $(document).ready(function() {
-                $(table).DataTable({
-                    searching: true,  // Enable search
-                    ordering: true,   // Enable sorting
-                    info: true,       // Show information (e.g., number of records)
-                });
+        // Initialize DataTable functionality
+$(document).ready(function() {
+    const tableId = table.id; // Get table ID
+
+    if (tableId.includes("dataTableData")) {
+        // For MVP data, disable sorting
+        $(table).DataTable({
+            searching: true,  
+            ordering: true, 
+            info: true,
+            order: [[2, "desc"]] 
+    
         });
+    } else {
+        // For group_1 and group_2, sort by the last column
+        $(table).DataTable({
+            searching: true,  
+            ordering: true,   
+            info: true,       
+            order: [[1, "desc"]] 
+        });
+    }
+});
+
 
     } catch (error) {
         messageDiv.textContent = `File not found: ${filename}. Wait for it to be generated.`;
