@@ -189,12 +189,30 @@ function createCell(text) {
 // Initialize on page load
 document.addEventListener("DOMContentLoaded", () => {
     populateDropdowns();
-    showTab("data");
 
-    // Fix tab switching issue
-    document.querySelectorAll(".tab-button").forEach(button => {
-        button.addEventListener("click", (event) => {
-            showTab(event.target.getAttribute("data-tab"));
+// Get the URL parameters
+    const params = new URLSearchParams(window.location.search);
+    const tabParam = params.get("tab");  // e.g., ?tab=group_1
+    const dropdownParam = params.get("dropdown"); // e.g., ?dropdown=day_6
+
+    // Activate the tab if the parameter exists
+    if (tabParam) {
+        const tabElement = document.querySelector(`[href="#${tabParam}"]`);
+        if (tabElement) {
+            const tab = new bootstrap.Tab(tabElement);
+            tab.show();
+        }
+    }
+
+    // Select the dropdown option if the parameter exists
+    if (dropdownParam) {
+        const dropdowns = document.querySelectorAll("select");
+        dropdowns.forEach(select => {
+            const option = select.querySelector(`option[value*="${dropdownParam}"]`);
+            if (option) {
+                select.value = option.value;
+                select.dispatchEvent(new Event("change")); // Trigger change event if needed
+            }
         });
-    });
+    }
 });
