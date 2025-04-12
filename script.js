@@ -100,9 +100,9 @@ async function loadCSV(folder) {
             }
         } else {
             // Other groups - Keep Player column, reverse the rest
-            const totalDays = rows[0].length - 1;
+            const totalDays = rows[0].length - 2;
             headerRow.appendChild(createHeaderCell("Player")); // First column remains "Player"
-            for (let day = totalDays; day > 0; day--) {
+            for (let day = totalDays; day >= 0; day--) {
                 headerRow.appendChild(createHeaderCell(`Day ${day}`));
             }
         }
