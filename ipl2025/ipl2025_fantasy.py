@@ -38,7 +38,7 @@ from datetime import date
 # Change for each day
 ipl_day_0 = date(2025, 3, 21)
 ipl_day_cur = date.today()
-day_num = abs((ipl_day_cur - ipl_day_0).days)
+day_num = 23
 day = 'day_' + str(day_num)
 prev_day = 'day_' + str(day_num - 1)
 print(day_num)
