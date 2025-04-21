@@ -1,14 +1,14 @@
-*DAY_30*
+*DAY_31*
 ```
 | Manager    |   Points |
 |:-----------|---------:|
-| Naren      |   1215.5 |
-| Sriram     |   1195   |
-| Raghav     |   1117   |
-| Srikumar   |   1044   |
-| Mahaarajan |    984.5 |
+| Naren      |   1319   |
+| Sriram     |   1231   |
+| Raghav     |   1135.5 |
+| Srikumar   |   1071.5 |
+| Mahaarajan |    992.5 |
+| Shashaank  |    945   |
 | Niranjini  |    939.5 |
-| Shashaank  |    910.5 |
-| Priyanka   |    871.5 |
+| Priyanka   |    916.5 |
 | Sudarshan  |    733   |
 ```
