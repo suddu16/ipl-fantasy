@@ -5,11 +5,11 @@
 | Manav         |   1479   |
 | Vasanth       |   1458.5 |
 | Kumar & Akash |   1445   |
-| Raghav        |   1403   |
+| Raghav        |   1428   |
 | Niranjini     |   1363   |
 | Vasan         |   1333.5 |
 | Mira & Arjun  |   1124.5 |
+| Sriram V      |    985.5 |
 | Sriram KM     |    975.5 |
-| Sriram V      |    960.5 |
 | Arvindh       |    774   |
 ```

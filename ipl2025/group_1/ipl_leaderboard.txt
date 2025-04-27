@@ -8,7 +8,7 @@
 | Srikumar   |   1207.5 |
 | Mahaarajan |   1145.5 |
 | Niranjini  |   1126   |
-| Shashaank  |   1006   |
-| Priyanka   |    969   |
+| Shashaank  |   1031   |
+| Priyanka   |    994   |
 | Sudarshan  |    828.5 |
 ```
