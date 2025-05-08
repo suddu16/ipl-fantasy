@@ -8,8 +8,8 @@
 | Manav         |   1699.5 |
 | Niranjini     |   1693   |
 | Vasan         |   1665.5 |
+| Mira & Arjun  |   1571   |
 | Sriram V      |   1363.5 |
-| Mira & Arjun  |   1342.5 |
 | Sriram KM     |   1192.5 |
 | Arvindh       |   1076   |
 ```
