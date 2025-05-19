@@ -3,8 +3,8 @@
 | Manager       |   Points |
 |:--------------|---------:|
 | Raghav        |   2073.5 |
+| Kumar & Akash |   2068   |
 | Vasanth       |   1891   |
-| Kumar & Akash |   1810.5 |
 | Manav         |   1802   |
 | Vasan         |   1769.5 |
 | Niranjini     |   1741.5 |

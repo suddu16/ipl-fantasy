@@ -2,10 +2,10 @@
 ```
 | Manager    |   Points |
 |:-----------|---------:|
+| Raghav     |   1831   |
 | Naren      |   1822   |
 | Sriram     |   1798   |
 | Srikumar   |   1597   |
-| Raghav     |   1573.5 |
 | Mahaarajan |   1552   |
 | Priyanka   |   1503   |
 | Niranjini  |   1439   |
