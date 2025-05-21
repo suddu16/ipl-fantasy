@@ -1,5 +1,5 @@
 const folders = ["data", "group_1", "group_2"];
-const maxDays = 60;
+const maxDays = 75;
 const mainlineBranch = `https://raw.githubusercontent.com/suddu16/ipl-fantasy/main`;
 
 // Function to populate dropdowns for each tab
@@ -7,7 +7,7 @@ function populateDropdowns() {
     folders.forEach(folder => {
         const select = document.getElementById(`${folder}Selector`);
         if (folder === 'data') {
-            for (let i = 0; i <= 60; i++) { 
+            for (let i = 40; i <= 60; i++) { 
                 const filename = `${mainlineBranch}/ipl2025/data/mvp_day_${i}.csv`;
 
                 const option = document.createElement("option");
@@ -16,7 +16,7 @@ function populateDropdowns() {
                 select.appendChild(option);
             }
         } else {
-            for (let day = 0; day <= maxDays; day++) {
+            for (let day = 40; day <= maxDays; day++) {
                 const option = document.createElement("option");
                 option.value = `${mainlineBranch}/ipl2025/${folder}/ipl2025_results_day_${day}.csv`;
                 option.textContent = `Day ${day}`;
