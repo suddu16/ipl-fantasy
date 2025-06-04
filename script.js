@@ -7,7 +7,7 @@ function populateDropdowns() {
     folders.forEach(folder => {
         const select = document.getElementById(`${folder}Selector`);
         if (folder === 'data') {
-            for (let i = 40; i <= 60; i++) { 
+            for (let i = 70; i <= maxDays; i++) { 
                 const filename = `${mainlineBranch}/ipl2025/data/mvp_day_${i}.csv`;
 
                 const option = document.createElement("option");
@@ -16,12 +16,16 @@ function populateDropdowns() {
                 select.appendChild(option);
             }
         } else {
-            for (let day = 40; day <= maxDays; day++) {
+            for (let day = 70; day <= maxDays; day++) {
                 const option = document.createElement("option");
                 option.value = `${mainlineBranch}/ipl2025/${folder}/ipl2025_results_day_${day}.csv`;
                 option.textContent = `Day ${day}`;
                 select.appendChild(option);
             }
+            const option = document.createElement("option");
+            option.value = `${mainlineBranch}/ipl2025/${folder}/ipl2025_results_day_final.csv`;
+            option.textContent = `Final`;
+            select.appendChild(option);
         }
     });
 }
